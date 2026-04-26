@@ -1,3 +1,5 @@
 /build/
 /nbproject/private/
 /dist/
+config.bat
+node_modules

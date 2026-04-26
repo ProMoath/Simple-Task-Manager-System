@@ -39,7 +39,7 @@ The project follows a modular structure for better maintainability:
 1. **Prerequisites:** Ensure you have the [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/) installed on your system.
 2. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/ProMoath/Simple-Task-Manager-System.git
    ```
 3. **Open in IDE:**
    * Open **Apache NetBeans** (or your preferred IDE that supports Java Swing).
@@ -54,11 +54,11 @@ The project follows a modular structure for better maintainability:
 
 | Login Screen | Users Dashboard |
 |:---:|:---:|
-| ![Login](screenshots\login.png) | ![Users](screenshots\uaer.png) |
+| ![Login](screenshots/login.png) | ![Users](screenshots/uaer.png) |
 
 | Tasks Management | Teams Management |
 |:---:|:---:|
-| ![Tasks](screenshots\task.png) | ![Teams](screenshots\team.png) |
+| ![Tasks](screenshots/task.png) | ![Teams](screenshots/team.png) |
 
 ## 🤝 Contributing
 
