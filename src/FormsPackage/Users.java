@@ -122,6 +122,7 @@ public class Users extends javax.swing.JFrame {
         Update = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("User Manegment");
 
         jLabel2.setText("Gmail");
 
@@ -309,7 +310,7 @@ public class Users extends javax.swing.JFrame {
                     .addComponent(ConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                     .addComponent(gmail)
                     .addComponent(Age))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(NewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Task, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -326,12 +327,12 @@ public class Users extends javax.swing.JFrame {
                         .addComponent(Team, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)))
                 .addComponent(back)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(search)
-                        .addGap(121, 121, 121))))
+                        .addGap(121, 121, 121))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,21 +444,34 @@ public class Users extends javax.swing.JFrame {
         }
         
          setInterfaceState("EDIT");
-         String roleValue = showuser.getValueAt(selectedRow, 3).toString();
-    Role.setSelectedItem(roleValue);
-    
-    JopField.setText(showuser.getValueAt(selectedRow, 4).toString());
-    
-    String teamValue = showuser.getValueAt(selectedRow, 5).toString();
-    Team.setSelectedItem(teamValue);
-    
-    Age.setText(showuser.getValueAt(selectedRow, 6).toString());
-    
-    
-    Object statusObj = showuser.getValueAt(selectedRow, 7);
-    if(statusObj != null) 
-        status.setSelected(Boolean.parseBoolean(statusObj.toString()));
-    
+         int idToUpdate = Integer.parseInt(showuser.getValueAt(selectedRow, 0).toString());
+         UserClass selectedUser = null;
+         for (UserClass u : DataStore.usersList) {
+             if (u.getId() == idToUpdate) {
+                 selectedUser = u;
+                 break;
+             }
+         }
+         
+         if (selectedUser != null) {
+             Id.setText(String.valueOf(selectedUser.getId()));
+             UserName.setText(selectedUser.getName());
+             gmail.setText(selectedUser.getEmail());
+             Password.setText(selectedUser.getPass());
+             ConfirmPassword.setText(selectedUser.getPass());
+             JopField.setText(selectedUser.getJobField());
+             Team.setSelectedItem(selectedUser.getTeams());
+             Age.setText(String.valueOf(selectedUser.getAge()));
+             status.setSelected(selectedUser.getStatus());
+             
+             String roleStr = selectedUser.getRole().toString();
+             for (int i = 0; i < Role.getItemCount(); i++) {
+                 if (Role.getItemAt(i).toString().equalsIgnoreCase(roleStr)) {
+                     Role.setSelectedIndex(i);
+                     break;
+                 }
+             }
+         }
     }//GEN-LAST:event_UpdateUserActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -524,8 +538,15 @@ public class Users extends javax.swing.JFrame {
     UserRole role = UserRole.valueOf(Role.getSelectedItem().toString().toUpperCase());
     boolean Status = status.isSelected();
     String team = Team.getSelectedItem().toString();
+    int age = 0;
+    try {
+        age = Integer.parseInt(Age.getText());
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Age must be a valid number!");
+        return;
+    }
     
-     UserClass newUser = new UserClass(id,name,email,password,confirm,job,role,Status,team);
+     UserClass newUser = new UserClass(id,name,email,password,confirm,job,role,Status,team,age);
      DataStore.usersList.add(newUser);
      JOptionPane.showMessageDialog(this, "User Added Successfully!");
      searchActionPerformed(null);  
@@ -554,9 +575,12 @@ public class Users extends javax.swing.JFrame {
                 Object[] row = {
                     user.getId(),     
                     user.getName(),   
-                    user.getJobField(),
                     user.getEmail(),   
-                    user.getRole()     
+                    user.getRole(),     
+                    user.getJobField(),
+                    user.getTeams(),
+                    user.getAge(),
+                    user.getStatus()
                 };
                 model.addRow(row);
                 found = true;
@@ -609,6 +633,14 @@ public class Users extends javax.swing.JFrame {
         
         boolean isStatus = status.isSelected();
         String team = Team.getSelectedItem().toString();
+        int age = 0;
+        try {
+            age = Integer.parseInt(Age.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Age must be a valid number!");
+            return;
+        }
+        
         String oldPass = oldUser.getPass();
         UserClass updatedUser = new UserClass(
             targetId, 
@@ -619,7 +651,8 @@ public class Users extends javax.swing.JFrame {
             job, 
             role, 
             isStatus, 
-            team
+            team,
+            age
         );
 
         

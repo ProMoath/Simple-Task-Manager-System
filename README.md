@@ -52,14 +52,21 @@ The project follows a modular structure for better maintainability:
 
 ## 📸 Screenshots
 
-*(Add screenshots of your application here to showcase the UI!)*
+| Login Screen | Users Dashboard |
+|:---:|:---:|
+| ![Login](screenshots\login.png) | ![Users](screenshots\uaer.png) |
 
-* Example: `![Login Screen](link-to-image)`
-* Example: `![Tasks Dashboard](link-to-image)`
+| Tasks Management | Teams Management |
+|:---:|:---:|
+| ![Tasks](screenshots\task.png) | ![Teams](screenshots\team.png) |
 
 ## 🤝 Contributing
 
-This project is a great starting point for learning Java Swing and application architecture. Feel free to fork the project, submit pull requests, or use it for educational purposes.
+This project is a great starting point for learning Java Swing and application architecture. Feel free to [fork](https://github.com/ProMoath/Simple-Task-Manager-System/fork) the project, submit [pull requests](https://github.com/ProMoath/Simple-Task-Manager-System/pulls), check the [issues page](https://github.com/ProMoath/Simple-Task-Manager-System/issues).
+ or use it for educational purposes.
 
----
-*Developed as a university/educational project.*
+ ---
+
+ <div align="center">
+  <p>⭐ If you liked this project, please give it a star!</p>
+</div>

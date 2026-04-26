@@ -17,9 +17,10 @@ public class UserClass extends ParentClass {
     private String jobField;
     boolean Status;
     String teams;
+    private int age;
     
     public UserClass(int id, String name, String email, String password,String Confirm ,
-            String jobField, UserRole role, boolean status, String teams)
+            String jobField, UserRole role, boolean status, String teams,int age)
     {
         super(id,name);
         Email=email;
@@ -28,12 +29,14 @@ public class UserClass extends ParentClass {
         Status=status; 
         this.role = role;
         this.jobField=jobField;
-        
+        this.teams=teams;
+        this.age=age;
     }
     public String getEmail() { return Email; }
     public String getJobField() { return jobField; }
     public UserRole getRole() { return role; }
     public String getTeams() { return teams; }
+    public int getAge() { return age; }
     public String getPass() {return this.Pass;}
     public boolean getStatus() { return Status; }
     

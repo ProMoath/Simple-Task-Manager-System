@@ -11,6 +11,7 @@ public class Project extends javax.swing.JFrame {
      */
     public Project() {
         initComponents();
+        setTitle("Project Management");
         projectid.setEditable(false);
         refreshTable();
         setInterfaceState("VIEW");

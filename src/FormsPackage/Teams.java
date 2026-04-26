@@ -13,6 +13,7 @@ public class Teams extends javax.swing.JFrame {
      */
     public Teams() {
         initComponents();
+        setTitle("Teams Management");
        teamid.setEditable(false);
         refreshTable();
         setInterfaceState("VIEW");
@@ -125,7 +126,6 @@ public class Teams extends javax.swing.JFrame {
                 showteam0ActionPerformed(evt);
             }
         });
-
         Update.setText("Edit Selected");
         Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
